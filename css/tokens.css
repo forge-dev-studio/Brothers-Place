@@ -1,0 +1,147 @@
+/* ==========================================================================
+   Brother's Place V2 - Design Tokens (source of truth)
+   Cathedral / Sanctuary aesthetic. Navy 900 night, window-gold warmth.
+   ========================================================================== */
+
+:root {
+  /* Color: surfaces and night */
+  --c-navy-900: #0F1B33;
+  --c-navy-800: #15233F;
+  --c-navy-700: #1B2B4B;
+  --c-navy-500: #2A3D63;
+  --c-navy-300: #5C6E8E;
+
+  /* Color: warmth and accent */
+  --c-window:    #E8B958;
+  --c-window-2:  #C8973F;
+  --c-window-3:  #8C6726;
+  --c-horizon:   #B8754A;
+
+  /* Color: paper */
+  --c-cream:     #F4ECDB;
+  --c-cream-2:   #EADFC6;
+  --c-cream-3:   #D9CBAA;
+
+  /* Color: ink */
+  --c-ink:       #1A1A1A;
+  --c-ink-soft:  #4A4A4A;
+  --c-ink-mute:  #6B6B6B;
+
+  /* Color: utility */
+  --c-line:               rgba(15, 27, 51, 0.10);
+  --c-line-warm:          rgba(232, 185, 88, 0.30);
+  --c-divider-on-dark:    rgba(244, 236, 219, 0.12);
+  --c-window-line-soft:   rgba(232, 185, 88, 0.30);
+  --c-overlay-navy:       rgba(15, 27, 51, 0.55);
+  --c-overlay-navy-65:    rgba(15, 27, 51, 0.65);
+  --c-overlay-navy-strong:rgba(15, 27, 51, 0.78);
+
+  /* Gradients (built from utility colors above) */
+  --gradient-hero-overlay: linear-gradient(
+    to top,
+    var(--c-navy-900) 8%,
+    var(--c-overlay-navy-strong) 28%,
+    rgba(15, 27, 51, 0.45) 55%,
+    rgba(15, 27, 51, 0.10) 80%,
+    transparent 100%
+  );
+  --gradient-page-hero-overlay: linear-gradient(
+    to top,
+    var(--c-navy-900) 5%,
+    var(--c-overlay-navy-65) 40%,
+    rgba(15, 27, 51, 0.20) 80%,
+    transparent 100%
+  );
+
+  /* Text shadow over imagery */
+  --shadow-text-hero: 0 2px 24px rgba(15, 27, 51, 0.45);
+
+  /* Type families */
+  --font-display: "Lora", Georgia, "Times New Roman", serif;
+  --font-body:    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Type scale */
+  --fs-hero:    clamp(2.5rem, 5vw + 1rem, 4.25rem);
+  --fs-display: clamp(2.25rem, 4vw + 1rem, 3.5rem);
+  --fs-h1:      clamp(2rem, 3vw + 1rem, 3rem);
+  --fs-h2:      clamp(1.625rem, 2vw + 1rem, 2.25rem);
+  --fs-h3:      clamp(1.25rem, 1vw + 1rem, 1.5rem);
+  --fs-lead:    clamp(1.125rem, 0.5vw + 1rem, 1.3125rem);
+  --fs-body:    1.0625rem;
+  --fs-small:   0.9375rem;
+  --fs-tiny:    0.8125rem;
+
+  /* Type weights and tracking */
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+  --tracking-tight:  -0.02em;
+  --tracking-tighter:-0.03em;
+  --tracking-wide:    0.04em;
+  --tracking-widest:  0.16em;
+
+  /* Line heights */
+  --lh-tight:  1.1;
+  --lh-snug:   1.25;
+  --lh-base:   1.5;
+  --lh-body:   1.65;
+
+  /* Space scale */
+  --s-1:  0.25rem;
+  --s-2:  0.5rem;
+  --s-3:  0.75rem;
+  --s-4:  1rem;
+  --s-5:  1.25rem;
+  --s-6:  1.5rem;
+  --s-8:  2rem;
+  --s-10: 2.5rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+  --s-20: 5rem;
+  --s-24: 6rem;
+  --s-32: 8rem;
+
+  /* Radius */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-pill: 999px;
+
+  /* Motion */
+  --ease:      cubic-bezier(.22, .61, .36, 1);
+  --ease-out:  cubic-bezier(.16, 1, .3, 1);
+  --dur-fast:  180ms;
+  --dur-med:   320ms;
+  --dur-slow:  600ms;
+
+  /* Layout */
+  --container:    1200px;
+  --container-md: 880px;
+  --container-sm: 640px;
+  --gutter:       clamp(1rem, 4vw, 2rem);
+
+  /* Elevation */
+  --shadow-soft:    0 12px 40px -16px rgba(15, 27, 51, 0.35);
+  --shadow-strong:  0 24px 60px -20px rgba(15, 27, 51, 0.55);
+  --shadow-glow:    0 0 80px -20px rgba(232, 185, 88, 0.50);
+  --shadow-window:  0 -120px 200px -60px rgba(232, 185, 88, 0.18) inset;
+
+  /* Z-index */
+  --z-skip:   100;
+  --z-header: 50;
+  --z-menu:   60;
+  --z-stick:  40;
+  --z-toast:  90;
+}
+
+/* Reduced motion: zero timing tokens so transitions become instant */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-med:  0ms;
+    --dur-slow: 0ms;
+  }
+}
