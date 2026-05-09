@@ -1002,6 +1002,83 @@ blockquote {
 }
 .leader-card__bio { color: var(--c-ink-soft); font-size: var(--fs-small); }
 
+/* --- Timeline (a-day-in-the-life, process steps) ----------------------- */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 2px solid var(--c-line-warm);
+  padding-left: var(--s-6);
+  margin-top: var(--s-6);
+}
+.timeline__step {
+  position: relative;
+  padding: var(--s-4) 0 var(--s-6);
+}
+.timeline__step::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--s-6) * -1 - 6px);
+  top: var(--s-5);
+  width: 10px; height: 10px;
+  border-radius: var(--r-pill);
+  background: var(--c-window);
+  border: 2px solid var(--c-cream);
+  box-shadow: 0 0 0 2px var(--c-window-line-soft);
+}
+.timeline__step h4 {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semi);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--c-navy-900);
+  margin-bottom: var(--s-1);
+}
+.timeline__step p {
+  color: var(--c-ink-soft);
+  font-size: var(--fs-small);
+  line-height: var(--lh-base);
+}
+
+/* --- Inner-page section dividers --------------------------------------- */
+.section--rule { padding-block: var(--s-16); }
+.section--rule + .section--rule { border-top: 1px solid var(--c-line); }
+
+/* --- Programs grid (used on overview pages) ---------------------------- */
+.programs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
+@media (max-width: 720px) { .programs-grid { grid-template-columns: 1fr; } }
+
+/* --- Resource list (Get Help resources) ------------------------------- */
+.resource-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-4);
+  margin-top: var(--s-6);
+}
+.resource-list__item {
+  padding: var(--s-5);
+  background: var(--c-cream);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-md);
+}
+.resource-list__item h4 {
+  margin-bottom: var(--s-2);
+  color: var(--c-navy-900);
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1.0625rem;
+}
+.resource-list__item p {
+  color: var(--c-ink-soft);
+  font-size: var(--fs-small);
+  margin-bottom: var(--s-2);
+}
+.resource-list__item a { font-weight: var(--fw-semi); color: var(--c-window-2); }
+@media (max-width: 720px) { .resource-list { grid-template-columns: 1fr; } }
+
 /* --- Apply / volunteer form layout ------------------------------------- */
 .form-section { max-width: 640px; margin-inline: auto; }
 .form-section .form-label { margin-top: var(--s-5); }
