@@ -1,0 +1,14 @@
+{
+  "name": "brothers-place",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Brother's Place - Christ-centered men's recovery and supportive housing in Rome, GA",
+  "scripts": {
+    "build:images": "node scripts/build-image-assets.js",
+    "audit": "node scripts/playwright-audit.js",
+    "serve": "python -m http.server 5500"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}
