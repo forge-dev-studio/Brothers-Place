@@ -113,6 +113,7 @@ function initCountUp() {
 
 function animateCount(el) {
   const target = parseInt(el.dataset.count, 10);
+  if (!Number.isFinite(target)) return; // already counted, or attribute stripped
   const suffix = el.dataset.suffix || '';
   const prefix = el.dataset.prefix || '';
   const duration = 1800;
@@ -145,19 +146,34 @@ function initDonateTiers() {
   });
 }
 
-/* --- Newsletter stub ------------------------- */
+/* --- Soft-submit forms (newsletter, apply, volunteer, etc.) ----------- */
 function initNewsletterStub() {
-  const form = document.querySelector('#newsletter-form');
-  if (!form) return;
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = form.querySelector('input[type="email"]')?.value || '';
-    if (!email) return;
-    // No backend endpoint yet. Show a soft confirmation.
-    const button = form.querySelector('button[type="submit"]');
-    if (button) {
-      button.textContent = 'Thank you';
-      button.disabled = true;
-    }
+  // Any form with data-soft-submit, or known IDs, gets a no-backend
+  // "thank you" confirmation in lieu of an actual POST. Backends slot in later.
+  const SELECTORS = [
+    '[data-soft-submit]',
+    '#newsletter-form',
+    '#apply-form',
+    '#volunteer-form',
+    '#church-form',
+    '#contact-form',
+    '#partners-form',
+  ];
+  const forms = new Set();
+  SELECTORS.forEach(sel => document.querySelectorAll(sel).forEach(f => forms.add(f)));
+  if (!forms.size) return;
+
+  forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const button = form.querySelector('button[type="submit"], input[type="submit"]');
+      const message = form.dataset.successMessage || 'Thank you, we will be in touch.';
+      if (button) {
+        button.textContent = message;
+        button.disabled = true;
+      }
+      const note = form.querySelector('[data-soft-confirm]');
+      if (note) note.hidden = false;
+    });
   });
 }

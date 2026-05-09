@@ -103,17 +103,26 @@ async function auditOne(browser, page, viewport, slug, route) {
 
   // Force-reveal all .fade-up elements (full-page screenshot doesn't reliably
   // fire IntersectionObserver for offscreen content during capture).
+  // Also force count-up to its final value AND drop the data-count attribute
+  // so the page's IntersectionObserver in main.js does not later restart the
+  // animation from 0 when the element scrolls into view during full-page capture.
   await page.evaluate(() => {
     document.querySelectorAll('.fade-up').forEach(el => el.classList.add('is-visible'));
-    // Also fire count-up animations to their final value for clean screenshots.
     document.querySelectorAll('[data-count]').forEach(el => {
       const target = parseInt(el.dataset.count, 10);
       const suffix = el.dataset.suffix || '';
       const prefix = el.dataset.prefix || '';
-      if (Number.isFinite(target)) el.textContent = prefix + target.toLocaleString() + suffix;
+      if (Number.isFinite(target)) {
+        el.textContent = prefix + target.toLocaleString() + suffix;
+      }
+      // Remove the attribute so any pending observer on this element no-ops.
+      el.removeAttribute('data-count');
     });
   });
-  await page.waitForTimeout(450); // settle for transitions
+  // Wait long enough for any in-flight count-up that had already started before
+  // the eval (1.8s in main.js) to fully resolve. animateCount in main.js bails
+  // early if data-count is stripped, which the eval above ensures.
+  await page.waitForTimeout(2200);
 
   const dirOut = path.join(SCREEN_DIR, viewport.name);
   fs.mkdirSync(dirOut, { recursive: true });
